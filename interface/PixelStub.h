@@ -1,10 +1,10 @@
 #ifndef PixelStubs_PixelStub_h
 #define PixelStubs_PixelStub_h
-/** \class PixelStub PixelStub.h RecoTracker/TkHitPairs/PixelStub.h 
+/** \class PixelStub PixelStub.h RecoTracker/PixelStubs/PixelStub.h 
  * Use shape in local y of pixel cluster to estimate the track incidence angle.
  * Can make comparisons for compatibilities.
- *  $Date: 2006/08/07 16:54:04 $
- *  $Revision: 1.3 $
+ *  $Date: 2007/03/01 23:50:38 $
+ *  $Revision: 1.1 $
  *  \author Aaron Dominguez (UNL)
  */
 #include "DataFormats/TrackerRecHit2D/interface/SiPixelRecHit.h"

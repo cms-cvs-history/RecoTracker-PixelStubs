@@ -32,8 +32,8 @@
 // SimDataFormats
 //#include "SimDataFormats/TrackingHit/interface/PSimHit.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHitContainer.h"
-#include "SimDataFormats/Track/interface/EmbdSimTrack.h"
-#include "SimDataFormats/Vertex/interface/EmbdSimVertex.h"
+#include "SimDataFormats/Track/interface/SimTrack.h"
+#include "SimDataFormats/Vertex/interface/SimVertex.h"
 #include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
 
 
@@ -131,10 +131,10 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
     init();
 
     edm::Handle<reco::TrackCollection> recotracks; 
-    e.getByLabel("CTFWMaterial", recotracks);
+    e.getByLabel("ctfWithMaterialTracks", recotracks);
                                                 
     edm::Handle<TrajectorySeedCollection> seeds;
-    e.getByLabel("GlobalPixelSeeds", seeds);
+    e.getByLabel("globalMixedSeeds", seeds);
 
     //  Display on Monitor Number of seeds and tracks.
     LogInfo("Stubs") << "Seeds: " << seeds->size() << " " << "Tracks: " << recotracks->size();
@@ -149,8 +149,8 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
     const TrackerGeometry& Tracker(*geom);
 
     //--- Get the simtracks for matching
-    Handle<edm::EmbdSimTrackContainer> simtracks;
-    e.getByLabel("SimG4Object",simtracks);
+    Handle<edm::SimTrackContainer> simtracks;
+    e.getByLabel("g4SimHits",simtracks);
 
     TrackerHitAssociator associate(e);
     std::vector<PSimHit> pixhit;
@@ -183,7 +183,7 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
      }//if pixhit
   }//for seednum
 
-  EmbdSimTrack st;
+  SimTrack st;
   //std::cout << "Running fillSimTrack" << std::endl;
   for(int i = 0; i != simtracks->size(); ++i)
   {
@@ -230,7 +230,7 @@ void StubAnalyzer::fillGlobal(const PixelGeomDetUnit *pixgeom, int iter)
   global_.gz1[iter] = GP1.z();
 }
 
-void StubAnalyzer::fillSimTrack(const EmbdSimTrack& trks, int iter)
+void StubAnalyzer::fillSimTrack(const SimTrack& trks, int iter)
 {
   simtrack_.simtrackelem = iter;
   simtrack_.eta[iter] = trks.momentum().eta();

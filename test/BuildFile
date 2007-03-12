@@ -4,6 +4,11 @@
 <use name=SimDataFormats/Track>
 <use name=SimTracker/TrackerHitAssociation>
 <use name=RecoLocalTracker/SiPixelRecHits>
+<use name=DataFormats/TrackReco>
 <use name=clhep>
 <use name=boost>
 <use name=root>
+
+<flags SEAL_PLUGIN_NAME="StubAnalyzer">
+<library file=*.cc name=StubAnalyzer>
+</library>

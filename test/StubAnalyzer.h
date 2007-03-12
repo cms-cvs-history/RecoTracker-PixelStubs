@@ -22,10 +22,10 @@
 
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHitContainer.h"
-#include "SimDataFormats/Track/interface/EmbdSimTrack.h"
+#include "SimDataFormats/Track/interface/SimTrack.h"
 #include "DataFormats/TrackReco/interface/Track.h"
-#include "SimDataFormats/Vertex/interface/EmbdSimVertex.h"
-#include "SimDataFormats/Track/interface/EmbdSimTrackContainer.h"
+#include "SimDataFormats/Vertex/interface/SimVertex.h"
+#include "SimDataFormats/Track/interface/SimTrackContainer.h"
 #include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
@@ -50,7 +50,7 @@ class StubAnalyzer : public edm::EDAnalyzer
   void fillLocal(const TrajectorySeed&, int);
   void fillGlobal(const PixelGeomDetUnit*, int);
   void fillSim(std::vector<PSimHit>::const_iterator, DetId, int);
-  void fillSimTrack(const EmbdSimTrack&, int);
+  void fillSimTrack(const SimTrack&, int);
   void fillRecoTrack(const reco::Track&, int);
   void fillRecoError(const reco::Track&, int);
   void init();

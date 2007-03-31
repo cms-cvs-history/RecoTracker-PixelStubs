@@ -68,7 +68,7 @@ double PixelStub::wy(bool fancy) const {
 }
 
 double PixelStub::piOver2MinusBeta() const {
-  double angle_calc= TMath::ATan2(wy()*0.0150,0.0285)*180/TMath::Pi();
+  double angle_calc= TMath::ATan2(wy()*0.0150,0.0285);
   return angle_calc;
 }
 

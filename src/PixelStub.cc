@@ -68,12 +68,12 @@ double PixelStub::wy(bool fancy) const {
 }
 
 double PixelStub::piOver2MinusBeta() const {
-  double angle_calc= TMath::ATan2(wy()*0.0150,0.0285);
+  double angle_calc= TMath::ATan2(wy()*0.0150,0.0285)*180/TMath::Pi();
   return angle_calc;
 }
 
 double PixelStub::beta() const {
-  return TMath::PiOver2() - piOver2MinusBeta();
+  return 90.0 - piOver2MinusBeta();
 }
 
 bool PixelStub::compatible(const PixelStub &otherstub) const {

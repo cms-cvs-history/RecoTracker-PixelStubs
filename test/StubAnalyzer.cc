@@ -136,7 +136,7 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
     e.getByLabel("ctfWithMaterialTracks", recotracks);
                                                 
     edm::Handle<TrajectorySeedCollection> seeds;
-    e.getByLabel("globalMixedSeeds", seeds);
+    e.getByLabel("seedsFromRegionHits", seeds);
 
     //  Display on Monitor Number of seeds and tracks.
     LogInfo("Stubs") << "Seeds: " << seeds->size() << " " << "Tracks: " << recotracks->size();

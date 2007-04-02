@@ -69,7 +69,8 @@ void StubAnalyzer::endJob()
 void StubAnalyzer::beginJob(const edm::EventSetup& es)
 {
    //Make a New TTree
-    stubfile_ = new TFile("StubAnalyzer.root","RECREATE");
+    std::string rootFile = conf_.getParameter<std::string>("RootFile");
+    stubfile_ = new TFile(rootFile.c_str(),"RECREATE");
     stubtree_ = new TTree("stubtree_","Here it goes.");
  
     int buffer = 64000;
@@ -132,11 +133,13 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
 
     init();
 
+    std::string trackFitter = conf_.getParameter<std::string>("TrackFitter");
     edm::Handle<reco::TrackCollection> recotracks; 
-    e.getByLabel("ctfWithMaterialTracks", recotracks);
-                                                
+    e.getByLabel(trackFitter, recotracks);
+
+    std::string seedGenerator = conf_.getParameter<std::string>("SeedGenerator");         
     edm::Handle<TrajectorySeedCollection> seeds;
-    e.getByLabel("seedsFromRegionHits", seeds);
+    e.getByLabel(seedGenerator, seeds);
 
     //  Display on Monitor Number of seeds and tracks.
     LogInfo("Stubs") << "Seeds: " << seeds->size() << " " << "Tracks: " << recotracks->size();

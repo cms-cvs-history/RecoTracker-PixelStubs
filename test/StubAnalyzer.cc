@@ -2,9 +2,6 @@
 // Description:  see StubAnalyzer.h
 // Author: Aaron Dominguez, Jason Keller, Tony Kelly (UNL)
 // Creation Date:  OGU Jun. 23 2006 Revised version.
-//
-//  BE SURE that the filename created in root is what you want!
-//  Go to the StubAnalyzer: beginJob()
 //--------------------------------------------
 #include <memory>
 #include <string>

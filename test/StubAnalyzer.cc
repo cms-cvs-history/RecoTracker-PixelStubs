@@ -10,7 +10,7 @@
 #include "RecoTracker/PixelStubs/test/StubAnalyzer.h"
 
 #include "DataFormats/TrackerRecHit2D/interface/SiPixelRecHitCollection.h"
-//#include "FWCore/Framework/interface/Handle.h"
+//#include "DataFormats/Common/interface/Handle.h"
 #include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/Framework/interface/EventSetup.h"
@@ -21,7 +21,7 @@
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/CommonDetUnit/interface/GeomDetType.h"
 #include "Geometry/CommonDetUnit/interface/GeomDetUnit.h"
-//#include "Geometry/Vector/interface/GlobalPoint.h" 
+//#include "DataFormats/GeometryVector/interface/GlobalPoint.h" 
 #include "DataFormats/GeometryVector/interface/GlobalPoint.h"
 
 // Added this to debug -Tony

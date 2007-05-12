@@ -5,7 +5,7 @@
 #include "TMath.h"
 
 PixelStub::PixelStub(const SiPixelRecHit &hit, double factor)
-  : wyOffset_(13,0), betaRes_(13,0), hit_(hit), betaCutFactor(factor)
+  : wyOffset_(13,0), betaRes_(13,0), hit_(hit), betaCutFactor_(factor)
 {
   wyOffset_[2]=-0.179757;
   wyOffset_[3]=-0.249349;
@@ -79,8 +79,8 @@ double PixelStub::beta() const {
 bool PixelStub::compatible(const PixelStub &otherstub) const {
   double beta_diff = std::abs(piOver2MinusBeta() - otherstub.piOver2MinusBeta());
   std::cout << hit_.cluster()->sizeY() << " " << beta_diff << std::endl;
-  std::cout << "The cut factor is set at " << betaCutFactor << std::endl;
-  if (beta_diff < betaCutFactor*std::sqrt( res()*res() + otherstub.res()*otherstub.res()) ) {
+  std::cout << "The cut factor is set at " << betaCutFactor_ << std::endl;
+  if (beta_diff < betaCutFactor_*std::sqrt( res()*res() + otherstub.res()*otherstub.res()) ) {
     std::cout << "Compatible!" << std::endl;
     return true;
   }

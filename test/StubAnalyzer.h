@@ -14,21 +14,12 @@
 
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
-//#include "DataFormats/Common/interface/Handle.h"
-#include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/Framework/interface/EventSetup.h"
-
-#include "DataFormats/Common/interface/EDProduct.h"
 #include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
-
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHitContainer.h"
-#include "SimDataFormats/Track/interface/SimTrack.h"
 #include "DataFormats/TrackReco/interface/Track.h"
-#include "SimDataFormats/Vertex/interface/SimVertex.h"
 #include "SimDataFormats/Track/interface/SimTrackContainer.h"
-#include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
-
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "TTree.h"
 #include "TFile.h"

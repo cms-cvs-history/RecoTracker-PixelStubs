@@ -6,43 +6,16 @@
 #include <memory>
 #include <string>
 #include <iostream>
-
 #include "RecoTracker/PixelStubs/test/StubAnalyzer.h"
-
 #include "DataFormats/TrackerRecHit2D/interface/SiPixelRecHitCollection.h"
-//#include "DataFormats/Common/interface/Handle.h"
 #include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/Framework/interface/ESHandle.h"
-#include "FWCore/Framework/interface/EventSetup.h"
-#include "DataFormats/TrackReco/interface/Track.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
-
 #include "Geometry/CommonDetUnit/interface/TrackingGeometry.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
-#include "Geometry/CommonDetUnit/interface/GeomDetType.h"
-#include "Geometry/CommonDetUnit/interface/GeomDetUnit.h"
-//#include "DataFormats/GeometryVector/interface/GlobalPoint.h" 
 #include "DataFormats/GeometryVector/interface/GlobalPoint.h"
-
-// Added this to debug -Tony
-#include "DataFormats/TrajectorySeed/src/classes.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
-
-// SimDataFormats
-//#include "SimDataFormats/TrackingHit/interface/PSimHit.h"
-#include "SimDataFormats/TrackingHit/interface/PSimHitContainer.h"
-#include "SimDataFormats/Track/interface/SimTrack.h"
-#include "SimDataFormats/Vertex/interface/SimVertex.h"
 #include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
-
-
-
-#include <TROOT.h>
-#include <TTree.h>
-#include <TFile.h>
-#include <TF1.h>
-#include <TH2F.h>
-#include <TH1F.h>
 
 /*
 StubAnalyzer is a class, with data members conf, stub tree, 

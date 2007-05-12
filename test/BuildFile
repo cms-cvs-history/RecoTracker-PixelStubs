@@ -5,9 +5,6 @@
 <use name=SimTracker/TrackerHitAssociation>
 <use name=RecoLocalTracker/SiPixelRecHits>
 <use name=DataFormats/TrackReco>
-<use name=clhep>
-<use name=boost>
-<use name=root>
 
 <flags EDM_PLUGIN=1>
 <library file=*.cc name=StubAnalyzer>

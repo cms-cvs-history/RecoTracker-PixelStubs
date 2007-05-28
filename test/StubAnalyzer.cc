@@ -160,7 +160,7 @@ void StubAnalyzer::analyze(const edm::Event& e, const edm::EventSetup& es)
 
   SimTrack st;
   //std::cout << "Running fillSimTrack" << std::endl;
-  for(int i = 0; i != simtracks->size(); ++i)
+  for(int i = 0; i != (int)simtracks->size(); ++i)
   {
     st = (*simtracks)[i];
     fillSimTrack(st, i);

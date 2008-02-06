@@ -9,6 +9,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <cmath>
 #include <algorithm>
@@ -63,7 +64,7 @@ const SiPixelRecHit& PixelStub::hit() const {
 double PixelStub::wy(bool fancy) const { //method_ == 1
   const SiPixelCluster &c = (*hit_.cluster());
   int size_y = std::min(c.sizeY(),12);
-  std::cout << "Size " << size_y << " Id " << hit_.geographicalId().rawId() << std::endl;
+  LogDebug ("PixStub") << "Size " << size_y << " Id " << hit_.geographicalId().rawId();
   double Wy = size_y - 1.0;
   if (fancy) {
     double qL = 0, qF = 0; // Charge on first & last col
@@ -110,11 +111,11 @@ bool PixelStub::compatible(const PixelStub &otherstub) const {
 
 	if (method_ < 3){
 		double beta_diff = std::fabs(beta() - otherstub.beta());
-		std::cout << "Cluster Size: " << hit_.cluster()->sizeY() << " Beta Diff:  " << beta_diff << std::endl;
-		std::cout << "The cut factor is set at " << betaCutFactor_ << std::endl;
+		LogDebug ("PixStub") << "Cluster Size: " << hit_.cluster()->sizeY() << " Beta Diff:  " << beta_diff
+												 << "The cut factor is set at " << betaCutFactor_;
 		if (beta_diff < betaCutFactor_*std::sqrt( res()*res() + otherstub.res()*otherstub.res())) {
-			std::cout << "Compatible!" << std::endl;
-			std::cout << "First stub beta: " << beta() << "\tSecond stub beta: " << otherstub.beta() << std::endl;
+			LogDebug ("PixStub") << "Compatible!" << "First stub beta: " << beta()
+													 << "\tSecond stub beta: " << otherstub.beta();
 			rtn = true;
 		}
 	}
@@ -125,23 +126,24 @@ bool PixelStub::compatible(const PixelStub &otherstub) const {
 		
 		templateProbs(gv);
 		otherstub.templateProbs(gv);
-			
-		/*		std::cout << "First stub alpha: " << alpha_ * RadtoDeg << "\tSecond stub alpha: " << otherstub.alpha_ * RadtoDeg << std::endl;
-		std::cout << "First stub beta: " << beta_ * RadtoDeg << "\tSecond stub beta: " << otherstub.beta_ * RadtoDeg << std::endl;
-		std::cout << "First stub prob in X: " << probX_ << "\t\tSecond stub prob in X: " << otherstub.probX_ << std::endl;
-		std::cout << "First stub prob in Y: " << probY_ << "\t\tSecond stub prob in Y: " << otherstub.probY_ << std::endl;
-		std::cout << "First stub qBin: " << qBin_ << "\t\tSecond stub qBin: " << otherstub.qBin_ << std::endl;*/
+
+		LogDebug ("PixStub") << "First stub alpha: " << alpha_ * RadtoDeg << "\tSecond stub alpha: "
+												 << otherstub.alpha_ * RadtoDeg << "First stub beta: " << beta_ * RadtoDeg
+												 << "\tSecond stub beta: " << otherstub.beta_ * RadtoDeg
+												 << "First stub prob in X: " << probX_ << "\t\tSecond stub prob in X: "
+												 << otherstub.probX_ << "First stub prob in Y: " << probY_
+												 << "\t\tSecond stub prob in Y: " << otherstub.probY_ << "First stub qBin: "
+												 << qBin_ << "\t\tSecond stub qBin: " << otherstub.qBin_;
 
 		if (method_ == 3 ) {
-			if (fabs(fabs(beta_) - fabs(otherstub.beta_)) < betaCutFactor_ / RadtoDeg) {
-				//std::cout << "Compatible!" << std::endl;
+			if (fabs(fabs(beta_) - fabs(otherstub.beta_)) < betaCutFactor_ / RadtoDeg)
 				rtn = true;
-			}
 		}
 		else {
 			if (probY_ > tempCutFactor_ && otherstub.probY_ > tempCutFactor_
 				&& qBin_ < 4 && otherstub.qBin_ < 4 ) {//&& probX_ > tempCutFactor_ && otherstub.probX_ > tempCutFactor_) {
-				//	std::cout << "Compatible!" << std::endl;
+				//				if (*hit_.geographicalId().subdetId() 
+				//LogDebug ("PixStub") << 
 				rtn = true;
 			}
 		}
@@ -177,22 +179,7 @@ void PixelStub::templateProbs(const GlobalVector &gv) const { //method_ == 4
 }
 
 GlobalPoint PixelStub::gpMaker() const {
-	//	const SiPixelCluster &clu = (*hit_.cluster());
-	
-	// get cluster center of gravity (of charge)
-	//float xcenter = clu.x();
-	//float ycenter = clu.y();
-	
-	// get the cluster position in local coordinates (cm) and covert to global coordinates (cm)
-	//const PixelGeomDetUnit *pixDet_ = dynamic_cast<const PixelGeomDetUnit*>( theDet_ );
-	
-	//const RectangularPixelTopology *theTopol
-	//	= dynamic_cast<const RectangularPixelTopology*>( & (pixDet_->specificTopology()) );
-	
-	//LocalPoint lp = theTopol->localPosition( MeasurementPoint(xcenter, ycenter) );
 	LocalPoint lp = hit_.localPosition();
-	
 	GlobalPoint gp = theDet_->surface().toGlobal( lp );
-
 	return gp;
 }
